@@ -1,0 +1,160 @@
+﻿@model MercDevs_ej2.Models.Datosfichatecnica
+
+<!--html para ver el pdf 
+    pd:desde otro navegardor se ve sin el /home/index y el logo 
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Ficha Técnica</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, .05);
+        }
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            color: #212529;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            background-color: #007bff;
+            border: 1px solid #007bff;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            text-decoration: none;
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <h1>Datos Ficha Tecnica</h1>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Datos de la Ficha Técnica</h3>
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <td>@Model.IdDatosFichaTecnica</td>
+                </tr>
+                <tr>
+                    <th>Fecha de inicio</th>
+                    <td>@Model.FechaInicio?.ToString("dd/MM/yyyy")</td>
+                </tr>
+                <tr>
+                    <th>Fecha de finalización</th>
+                    <td>@Model.FechaFinalizacion?.ToString("dd/MM/yyyy")</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Datos del Cliente</h3>
+            <table class="table table-striped">
+                <tr>
+                    <th>Nombre</th>
+                    <td>@Model.RecepcionEquipo.IdClienteNavigation.Nombre</td>
+                </tr>
+                <tr>
+                    <th>Apellido</th>
+                    <td>@Model.RecepcionEquipo.IdClienteNavigation.Apellido</td>
+                </tr>
+                <tr>
+                    <th>Correo</th>
+                    <td>@Model.RecepcionEquipo.IdClienteNavigation.Correo</td>
+                </tr>
+                <tr>
+                    <th>Teléfono</th>
+                    <td>@Model.RecepcionEquipo.IdClienteNavigation.Telefono</td>
+                </tr>
+                <tr>
+                    <th>Dirección</th>
+                    <td>@Model.RecepcionEquipo.IdClienteNavigation.Direccion</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Datos de Recepción de Equipos</h3>
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <td>@Model.RecepcionEquipo.Id</td>
+                </tr>
+                <tr>
+                    <th>Tipo PC</th>
+                    <td>@Model.RecepcionEquipo.TipoPc</td>
+                </tr>
+                <tr>
+                    <th>Marca PC</th>
+                    <td>@Model.RecepcionEquipo.MarcaPc</td>
+                </tr>
+                <tr>
+                    <th>Modelo PC</th>
+                    <td>@Model.RecepcionEquipo.ModeloPc</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Diagnóstico y Soluciones</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Solución</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Diagnosticosolucions)
+                    {
+                        <tr>
+                            <td>@item.DescripcionDiagnostico</td>
+                            <td>@item.DescripcionSolucion</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Observaciones y Recomendaciones</h3>
+            <table class="table table-striped">
+                <tr>
+                    <td>@Model.PobservacionesRecomendaciones</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
